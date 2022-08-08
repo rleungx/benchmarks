@@ -1,8 +1,10 @@
+GOBIN=$(shell go env GOPATH)/bin
+
 default: gen bench
 
-gen: gen-gogoprotobuf gen-golangprotobuf gen-golangprotobuf-v2
+gen: gen-gogoprotobuf gen-golangprotobuf gen-golangprotobuf-v2 gen-vtprotobuf
 
-bench: bench-gogoprotobuf bench-golangprotobuf bench-golangprotobuf-v2
+bench: bench-gogoprotobuf bench-golangprotobuf bench-golangprotobuf-v2 bench-vtprotobuf
 
 gen-gogoprotobuf:
 	go install github.com/gogo/protobuf/protoc-gen-gofast@latest
@@ -14,18 +16,26 @@ gen-golangprotobuf:
 
 gen-golangprotobuf-v2:
 	go install google.golang.org/protobuf/cmd/protoc-gen-go@latest
-	protoc --go_out=golangprotobuf-v2 proto//benchmark.proto
+	protoc --go_out=golangprotobuf-v2 proto/benchmark.proto
 
-bench-gogoprotobuf: gen-gogoprotobuf
+gen-vtprotobuf:
+	go install github.com/planetscale/vtprotobuf/cmd/protoc-gen-go-vtproto@latest
+	protoc --go_out=vtprotobuf --go-vtproto_out=vtprotobuf --plugin protoc-gen-go-vtproto="$(GOBIN)/protoc-gen-go-vtproto" proto/benchmark.proto
+
+bench-gogoprotobuf:
 	cd gogoprotobuf && go test -bench . -benchmem
 
-bench-golangprotobuf: gen-golangprotobuf
+bench-golangprotobuf:
 	cd golangprotobuf && go test -bench . -benchmem
 
-bench-golangprotobuf-v2: gen-golangprotobuf-v2
+bench-golangprotobuf-v2:
 	cd golangprotobuf-v2 && go test -bench . -benchmem
 
+bench-vtprotobuf:
+	cd vtprotobuf && go test -bench . -benchmem
+
 clean: 
-	rm gogoprotobuf/benchmark.pb.go
-	rm golangprotobuf/benchmark.pb.go
-	rm golangprotobuf-v2/benchmark.pb.go
+	rm gogoprotobuf/*.pb.go
+	rm golangprotobuf/*.pb.go
+	rm golangprotobuf-v2/*.pb.go
+	rm vtprotobuf/*.pb.go

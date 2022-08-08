@@ -17,5 +17,4 @@ message Message {
         VIDEO = 6;
     }
     Corpus corpus = 5;
-    
 }
