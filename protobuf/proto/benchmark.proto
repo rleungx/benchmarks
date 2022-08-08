@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+option go_package = "./;pb";
+
+message Message {
+    string query = 1;
+    int32 page_number = 2;
+    int32 result_per_page = 3;
+    bytes comment=4;
+    enum Corpus {
+        UNIVERSAL = 0;
+        WEB = 1;
+        IMAGES = 2;
+        LOCAL = 3;
+        NEWS = 4;
+        PRODUCTS = 5;
+        VIDEO = 6;
+    }
+    Corpus corpus = 5;
+    
+}
