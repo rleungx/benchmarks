@@ -37,3 +37,5 @@ func BenchmarkProto3Unmarshal(b *testing.B) {
 		}
 	}
 }
+
+// TODO: benchmark clone, but it hasn't been not supported yet. See https://github.com/planetscale/vtprotobuf/issues/45.

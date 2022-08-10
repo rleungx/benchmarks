@@ -39,3 +39,10 @@ func BenchmarkProto3Unmarshal(b *testing.B) {
 		}
 	}
 }
+
+// Benchmark Proto3 Clone
+func BenchmarkProto3Clone(b *testing.B) {
+	for i := 0; i < b.N; i++ {
+		_ = proto.Clone(message)
+	}
+}
