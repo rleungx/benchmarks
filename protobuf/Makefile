@@ -2,9 +2,9 @@ GOBIN=$(shell go env GOPATH)/bin
 
 default: gen bench
 
-gen: gen-gogoprotobuf gen-golangprotobuf gen-golangprotobuf-v2 gen-vtprotobuf gen-csproto
+gen: gen-gogoprotobuf gen-golangprotobuf gen-golangprotobuf-v2 gen-vtprotobuf gen-csproto gen-fastpb
 
-bench: bench-gogoprotobuf bench-golangprotobuf bench-golangprotobuf-v2 bench-vtprotobuf bench-csproto
+bench: bench-gogoprotobuf bench-golangprotobuf bench-golangprotobuf-v2 bench-vtprotobuf bench-csproto bench-fastpb
 
 gen-gogoprotobuf:
 	go install github.com/gogo/protobuf/protoc-gen-gofast@latest
@@ -26,6 +26,10 @@ gen-csproto:
 	go install github.com/CrowdStrike/csproto/cmd/protoc-gen-fastmarshal@latest
 	protoc --go_out=csproto --fastmarshal_out=csproto --fastmarshal_opt=apiversion=v2 proto/*.proto
 
+gen-fastpb:
+	go install github.com/cloudwego/fastpb/protoc-gen-fastpb@latest
+	protoc --go_out=fastpb --fastpb_out=fastpb proto/*.proto
+
 bench-gogoprotobuf:
 	cd gogoprotobuf && go test -bench . -benchmem
 
@@ -41,9 +45,13 @@ bench-vtprotobuf:
 bench-csproto:
 	cd csproto && go test -bench . -benchmem
 
+bench-fastpb:
+	cd fastpb && go test -bench . -benchmem
+
 clean: 
-	rm gogoprotobuf/*.pb.go
-	rm golangprotobuf/*.pb.go
-	rm golangprotobuf-v2/*.pb.go
-	rm vtprotobuf/*.pb.go
-	rm csproto/*.pb.fm.go
+	rm -rf gogoprotobuf/*.pb.go
+	rm -rf golangprotobuf/*.pb.go
+	rm -rf golangprotobuf-v2/*.pb.go
+	rm -rf vtprotobuf/*.pb.go
+	rm -rf csproto/*.pb*.go
+	rm -rf fastpb/*.pb*.go

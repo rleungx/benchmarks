@@ -17,6 +17,7 @@
 # Genetated files of protobuf
 *.pb.go
 *.pb.fm.go
+*.pb.fast.go
 
 # Dependency directories (remove the comment below to include it)
 # vendor/

@@ -1,0 +1,4 @@
+github.com/cloudwego/fastpb v0.0.1 h1:E68PDVsY+dC1Z1kAhD8gA/PaZkLFveZwUPof45QLmiQ=
+github.com/cloudwego/fastpb v0.0.1/go.mod h1:scLJDGxKXd+CRSHXarLqzkDjpR3iN28UULA83PtUm9Q=
+google.golang.org/protobuf v1.28.1 h1:d0NfwRgPtno5B1Wa6L2DAG+KivqkdutMf1UhdNx175w=
+google.golang.org/protobuf v1.28.1/go.mod h1:HV8QOd/L58Z+nl8r43ehVNZIU/HEI6OcFqwMG9pJV4I=
