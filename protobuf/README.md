@@ -6,6 +6,8 @@
 2. Initialize the `Message` variables in each `*/benchmark_test.go`
 3. Run `make`
 
+More details can be found in [Makefile](./Makefile).
+
 ## Benchmark results
 
 Here are benchmark results of the example:

@@ -31,27 +31,27 @@ gen-fastpb:
 	protoc --go_out=fastpb --fastpb_out=fastpb proto/*.proto
 
 bench-gogoprotobuf:
-	cd gogoprotobuf && go test -bench . -benchmem
+	@cd gogoprotobuf && go test -bench . -benchmem
 
 bench-golangprotobuf:
-	cd golangprotobuf && go test -bench . -benchmem
+	@cd golangprotobuf && go test -bench . -benchmem
 
 bench-golangprotobuf-v2:
-	cd golangprotobuf-v2 && go test -bench . -benchmem
+	@cd golangprotobuf-v2 && go test -bench . -benchmem
 
 bench-vtprotobuf:
-	cd vtprotobuf && go test -bench . -benchmem
+	@cd vtprotobuf && go test -bench . -benchmem
 
 bench-csproto:
-	cd csproto && go test -bench . -benchmem
+	@cd csproto && go test -bench . -benchmem
 
 bench-fastpb:
-	cd fastpb && go test -bench . -benchmem
+	@cd fastpb && go test -bench . -benchmem
 
 clean: 
-	rm -rf gogoprotobuf/*.pb.go
-	rm -rf golangprotobuf/*.pb.go
-	rm -rf golangprotobuf-v2/*.pb.go
-	rm -rf vtprotobuf/*.pb.go
-	rm -rf csproto/*.pb*.go
-	rm -rf fastpb/*.pb*.go
+	@rm -rf gogoprotobuf/*.pb.go
+	@rm -rf golangprotobuf/*.pb.go
+	@rm -rf golangprotobuf-v2/*.pb.go
+	@rm -rf vtprotobuf/*.pb.go
+	@rm -rf csproto/*.pb*.go
+	@rm -rf fastpb/*.pb*.go
